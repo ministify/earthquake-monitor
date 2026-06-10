@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Earthquake Monitor</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#0a0e1a">
+  <link rel="apple-touch-icon" href="icon-192.png">
+</head>
+<body>
+
+<div class="eq-widget-wrapper">
+  <div class="app-shell" id="eq-app">
+    <div class="status-bar">
+      <span id="eq-clock">00:00:00</span>
+      <span>LIVE API FEED</span>
+    </div>
+
+    <div class="monitor-panel">
+      <div class="pulse-ring"><div class="pulse-dot"></div></div>
+      <div class="status-text" id="eq-sys-status">INITIALIZING...</div>
+    </div>
+
+    <div class="data-grid">
+      <div class="data-cell">
+        <div class="data-val" id="eq-mag-val">--</div>
+        <div class="data-lbl">MAGNITUDE</div>
+      </div>
+      <div class="data-cell">
+        <div class="data-val" id="eq-dist-val">--</div>
+        <div class="data-lbl">DISTANCE</div>
+      </div>
+    </div>
+
+    <div class="event-card">
+      <div class="event-header">
+        <div class="event-title" id="eq-event-title">Awaiting Data...</div>
+        <div class="event-time" id="eq-event-time">--:--</div>
+      </div>
+      <div class="event-loc" id="eq-event-loc">Connecting to seismic network...</div>
+      
+      <div class="eta-box">
+        <div class="eta-val" id="eq-eta-val">--:--</div>
+        <div class="eta-lbl" id="eq-eta-lbl">ESTIMATED S-WAVE ETA</div>
+      </div>
+    </div>
+
+    <div class="sos-panel">
+      <div class="sos-grid">
+        <button class="btn btn-red" id="eq-btn-emergency" style="opacity: 0.8;">
+          <span style="font-size: 20px;">⚠</span>
+          <span>Call Emergency</span>
+        </button>
+        <button class="btn btn-blue" id="eq-btn-share">
+          <span style="font-size: 20px;">📡</span>
+          <span>Share Status</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

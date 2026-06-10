@@ -1,0 +1,116 @@
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Exo+2:wght@400;500;700&display=swap');
+
+/* Scoped variables to prevent global conflicts */
+.eq-widget-wrapper {
+  --ff-mono: 'Share Tech Mono', monospace;
+  --ff-ui: 'Exo 2', sans-serif;
+  --bg-dark: #0a0e1a;
+  --bg-panel: #1a2230;
+  --text-main: #fff;
+  --text-muted: #7a8fa8;
+  --color-safe: #33cc77;
+  --color-warn: #ffaa00;
+  --color-danger: #ff4444;
+  
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+  font-family: var(--ff-ui);
+  background: transparent;
+  width: 100%;
+}
+
+.eq-widget-wrapper *, .eq-widget-wrapper *::before, .eq-widget-wrapper *::after { 
+  box-sizing: border-box; 
+  margin: 0; 
+  padding: 0; 
+}
+
+/* Android Shell */
+.eq-widget-wrapper .app-shell {
+  background: var(--bg-dark);
+  border-radius: 24px;
+  border: 1px solid #1e2a3a;
+  overflow: hidden;
+  width: 100%;
+  max-width: 420px;
+  color: var(--text-main);
+  box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+}
+
+/* Header & Status */
+.eq-widget-wrapper .status-bar {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 20px; background: #060a12; font-size: 12px;
+  color: var(--text-muted); font-family: var(--ff-mono);
+}
+
+/* CSS Pulse Monitor */
+.eq-widget-wrapper .monitor-panel {
+  padding: 20px; text-align: center; border-bottom: 1px solid var(--bg-panel);
+  background: linear-gradient(180deg, rgba(10,14,26,1) 0%, rgba(6,10,18,1) 100%);
+}
+.eq-widget-wrapper .pulse-ring {
+  width: 60px; height: 60px; border-radius: 50%;
+  background: rgba(51, 204, 119, 0.1);
+  margin: 0 auto 10px; position: relative;
+  display: flex; align-items: center; justify-content: center;
+}
+.eq-widget-wrapper .pulse-ring::before {
+  content: ''; position: absolute; width: 100%; height: 100%;
+  border-radius: 50%; border: 2px solid var(--color-safe);
+  animation: pulse 2s infinite ease-out;
+}
+.eq-widget-wrapper .pulse-dot {
+  width: 12px; height: 12px; background: var(--color-safe); border-radius: 50%;
+}
+@keyframes pulse {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2); opacity: 0; }
+}
+.eq-widget-wrapper .status-text { font-size: 11px; letter-spacing: 2px; color: var(--color-safe); font-family: var(--ff-mono); }
+
+/* Data Grid */
+.eq-widget-wrapper .data-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--bg-panel);
+  border-bottom: 1px solid var(--bg-panel);
+}
+.eq-widget-wrapper .data-cell { background: var(--bg-dark); padding: 16px; text-align: center; }
+.eq-widget-wrapper .data-val { font-family: var(--ff-mono); font-size: 24px; font-weight: 700; color: var(--text-main); margin-bottom: 4px; }
+.eq-widget-wrapper .data-lbl { font-size: 10px; color: var(--text-muted); letter-spacing: 1px; }
+
+/* Event Card */
+.eq-widget-wrapper .event-card { padding: 20px; border-bottom: 1px solid var(--bg-panel); }
+.eq-widget-wrapper .event-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+.eq-widget-wrapper .event-title { font-size: 14px; font-weight: 700; color: var(--color-warn); }
+.eq-widget-wrapper .event-time { font-family: var(--ff-mono); font-size: 12px; color: var(--text-muted); }
+.eq-widget-wrapper .event-loc { font-size: 13px; color: #a0b4c8; line-height: 1.4; margin-bottom: 12px; }
+
+/* Countdown */
+.eq-widget-wrapper .eta-box {
+  background: rgba(255, 170, 0, 0.1); border: 1px solid rgba(255, 170, 0, 0.2);
+  border-radius: 8px; padding: 12px; text-align: center;
+}
+.eq-widget-wrapper .eta-val { font-family: var(--ff-mono); font-size: 28px; font-weight: 700; color: var(--color-warn); }
+.eq-widget-wrapper .eta-lbl { font-size: 11px; color: var(--color-warn); letter-spacing: 1px; margin-top: 4px; }
+
+/* SOS Actions */
+.eq-widget-wrapper .sos-panel { padding: 20px; background: #0d1424; }
+.eq-widget-wrapper .sos-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.eq-widget-wrapper .btn {
+  border: none; border-radius: 12px; padding: 14px 12px;
+  font-family: var(--ff-ui); font-size: 13px; font-weight: 700;
+  cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  transition: transform 0.1s; text-decoration: none; text-align: center;
+}
+.eq-widget-wrapper .btn:active { transform: scale(0.96); }
+.eq-widget-wrapper .btn-red { background: #cc2222; color: #fff; }
+.eq-widget-wrapper .btn-blue { background: #1155aa; color: #fff; }
+
+/* Dynamic States */
+.eq-widget-wrapper .state-danger .pulse-ring::before { border-color: var(--color-danger); animation-duration: 0.5s; }
+.eq-widget-wrapper .state-danger .pulse-dot { background: var(--color-danger); }
+.eq-widget-wrapper .state-danger .status-text { color: var(--color-danger); }
+.eq-widget-wrapper .state-danger .event-title { color: var(--color-danger); }
+.eq-widget-wrapper .state-danger .eta-box { background: rgba(255, 68, 68, 0.1); border-color: rgba(255, 68, 68, 0.3); }
+.eq-widget-wrapper .state-danger .eta-val, .eq-widget-wrapper .state-danger .eta-lbl { color: var(--color-danger); }
