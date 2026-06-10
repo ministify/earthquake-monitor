@@ -161,3 +161,41 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
   }
+
+// Add this anywhere in your script.js (outside other functions)
+let deferredPrompt;
+const installBtn = document.getElementById('install-btn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  // Prevent the mini-infobar from appearing on mobile
+  e.preventDefault();
+  
+  // Stash the event so it can be triggered later.
+  deferredPrompt = e;
+  
+  // Update UI to notify the user they can install the PWA
+  installBtn.style.display = 'block';
+});
+
+installBtn.addEventListener('click', async () => {
+  // Hide the app provided install promotion
+  installBtn.style.display = 'none';
+  
+  // Show the native install prompt
+  if (deferredPrompt) {
+    deferredPrompt.prompt();
+    
+    // Wait for the user to respond to the prompt
+    const { outcome } = await deferredPrompt.userChoice;
+    console.log(`User response to the install prompt: ${outcome}`);
+    
+    // We've used the prompt, and can't use it again, throw it away
+    deferredPrompt = null;
+  }
+});
+
+// Optional: Hide the button if the app is already successfully installed
+window.addEventListener('appinstalled', () => {
+  installBtn.style.display = 'none';
+  console.log('PWA was installed');
+});
